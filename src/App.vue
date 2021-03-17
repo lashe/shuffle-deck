@@ -8,7 +8,7 @@
       type="number"
       min="0"
       max="10000"
-      placeholder="number"
+      placeholder="Number of Rounds"
       v-model="numRnds"
     />
     <label v-show="err" style="color: red">please enter a valid number</label>
