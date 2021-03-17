@@ -14,14 +14,14 @@
     <label v-show="err" style="color: red">please enter a valid number</label>
     <input
       class="input"
-      placeholder="start time"
+      placeholder="Time Started"
       v-model="starttime"
       readonly
     />
-    <input class="input" placeholder="end time" v-model="endtime" readonly />
+    <input class="input" placeholder="Time Ended" v-model="endtime" readonly />
     <input
       class="input"
-      placeholder="total time"
+      placeholder="Total Time"
       v-model="totaltime"
       readonly
     />
@@ -32,20 +32,20 @@
       <tr>
         <th>Algorithm name</th>
         <th>Time Started</th>
-        <th>Time ended</th>
-        <th>Total time</th>
+        <th>Time Ended</th>
+        <th>Total Time</th>
       </tr>
       <tr>
         <td>JS Random</td>
-        <td>{{starttime2}}</td>
-        <td>{{endtime2}}</td>
-        <td>{{totaltime2}}</td>
+        <td>{{ starttime2 }}</td>
+        <td>{{ endtime2 }}</td>
+        <td>{{ totaltime2 }}</td>
       </tr>
       <tr>
         <td>Xorshift</td>
-        <td>{{starttime3}}</td>
-        <td>{{endtime3}}</td>
-        <td>{{totaltime3}}</td>
+        <td>{{ starttime3 }}</td>
+        <td>{{ endtime3 }}</td>
+        <td>{{ totaltime3 }}</td>
       </tr>
       <!-- <tr>
         <td>WELL512a</td>
@@ -82,8 +82,8 @@ export default {
       starttime4: "",
       endtime4: "",
       totaltime4: "",
-      Rt: '',
-      Rt2: '',
+      Rt: "",
+      Rt2: "",
       err: false,
       warning: false,
     };
@@ -95,28 +95,28 @@ export default {
     onClick() {
       if (this.numRnds && this.numRnds <= 10000) {
         if (!this.starttime) {
-          this.starttime = new Date().toISOString().substr(11, 19)
-          this.Rt = new Date().getTime()
+          this.starttime = new Date().toISOString().slice(11,19);
+          this.Rt = new Date().getTime();
         }
-        this.starttime2 = new Date().toISOString().substr(11, 19)
-        const a = performance.now()
+        this.starttime2 = new Date().toISOString().slice(11,19);
+        const a = performance.now();
         console.time("randomnum");
         for (let i = 0; i < this.numRnds; i++) {
           const clic = Math.random();
           console.log(clic);
         }
-        const b = performance.now()
-        this.endtime2 = new Date().toISOString().substr(11, 19)
+        const b = performance.now();
+        this.endtime2 = new Date().toISOString().slice(11,19);
         console.timeEnd("randomnum");
-        this.totaltime2 = (b-a)
+        this.totaltime2 = b - a;
         if (this.endtime2 && this.endtime3) {
-          this.endtime = new Date().toISOString().substr(11, 19)
-          this.Rt2 = new Date().getTime()
+          this.endtime = new Date().toISOString().slice(11,19);
+          this.Rt2 = new Date().getTime();
           // this.totaltime = this.Rt2 - this.Rt
-          this.totaltime = this.totaltime2 + this.totaltime3
+          this.totaltime = this.totaltime2 + this.totaltime3;
         }
       } else {
-        this.err = true
+        this.err = true;
       }
     },
     onClick2() {
@@ -124,66 +124,69 @@ export default {
       const xorshift = require("xorshift");
       if (this.numRnds && this.numRnds <= 10000) {
         if (!this.starttime) {
-          this.starttime = new Date().toISOString().substr(11, 19)
-          this.Rt = new Date().getTime()
+          this.starttime = new Date().toISOString().slice(11,19);
+          this.Rt = new Date().getTime();
         }
-        const a = performance.now()
-        this.starttime3 = new Date().toISOString().substr(11, 19)
+        const a = performance.now();
+        this.starttime3 = new Date().toISOString().slice(11,19);
         console.time("randomnum2");
         for (let i = 0; i < this.numRnds; i++) {
           const clic = xorshift.random();
           console.log(clic);
         }
-        const b = performance.now()
-        this.endtime3 = new Date().toISOString().substr(11, 19)
+        const b = performance.now();
+        this.endtime3 = new Date().toISOString().slice(11,19);
         console.timeEnd("randomnum2");
-        this.totaltime3 = (b-a)
+        this.totaltime3 = b - a;
         if (this.endtime2 && this.endtime3) {
-          this.endtime = new Date().toISOString().substr(11, 19)
-          this.Rt2 = new Date().getTime()
+          this.endtime = new Date().toISOString().slice(11,19);
+          this.Rt2 = new Date().getTime();
           // this.totaltime = this.Rt2 - this.Rt
-          this.totaltime = this.totaltime2 + this.totaltime3
+          this.totaltime = this.totaltime2 + this.totaltime3;
         }
-      }
-      else {
-        this.err = true
+      } else {
+        this.err = true;
       }
     },
-    clear () {
-      this.err = false
+    clear() {
+      this.err = false;
     },
     warn() {
-      if (this.starttime && !this.endtime){
-        if (confirm("Test has not been completed. to continue test with current round value click cancel, to input new value click ok")) {
-          this.starttime=''
-          this.starttime2=''
-          this.starttime3=''
-          this.starttime4=''
-          this.endtime=''
-          this.endtime2=''
-          this.endtime3=''
-          this.endtime4=''
-          this.totaltime=''
-          this.totaltime2=''
-          this.totaltime3=''
-          this.totaltime4=''
+      if (this.starttime && !this.endtime) {
+        if (
+          confirm(
+            "Test has not been completed. to continue test with current round value click cancel, to input new value click ok"
+          )
+        ) {
+          this.starttime = "";
+          this.starttime2 = "";
+          this.starttime3 = "";
+          this.starttime4 = "";
+          this.endtime = "";
+          this.endtime2 = "";
+          this.endtime3 = "";
+          this.endtime4 = "";
+          this.totaltime = "";
+          this.totaltime2 = "";
+          this.totaltime3 = "";
+          this.totaltime4 = "";
         } else {
-          this.confirm = false
+          this.confirm = false;
         }
       }
-      if(this.starttime && this.endtime){
-         this.starttime=''
-          this.starttime2=''
-          this.starttime3=''
-          this.starttime4=''
-          this.endtime=''
-          this.endtime2=''
-          this.endtime3=''
-          this.endtime4=''
-          this.totaltime=''
-          this.totaltime2=''
-          this.totaltime3=''
-          this.totaltime4=''
+      if (this.starttime && this.endtime) {
+        this.starttime = "";
+        this.starttime2 = "";
+        this.starttime3 = "";
+        this.starttime4 = "";
+        this.endtime = "";
+        this.endtime2 = "";
+        this.endtime3 = "";
+        this.endtime4 = "";
+        this.totaltime = "";
+        this.totaltime2 = "";
+        this.totaltime3 = "";
+        this.totaltime4 = "";
       }
     },
   },
@@ -192,7 +195,9 @@ export default {
 </script>
 
 <style>
-table, th, td {
+table,
+th,
+td {
   border: 1px solid black;
 }
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
