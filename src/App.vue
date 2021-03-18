@@ -82,8 +82,6 @@ export default {
       starttime4: "",
       endtime4: "",
       totaltime4: "",
-      Rt: "",
-      Rt2: "",
       err: false,
       warning: false,
     };
@@ -95,10 +93,9 @@ export default {
     onClick() {
       if (this.numRnds && this.numRnds <= 10000) {
         if (!this.starttime) {
-          this.starttime = new Date().toISOString().slice(11,19);
-          this.Rt = new Date().getTime();
+          this.starttime = new Date().toISOString().slice(11, 19);
         }
-        this.starttime2 = new Date().toISOString().slice(11,19);
+        this.starttime2 = new Date().toISOString().slice(11, 19);
         const a = performance.now();
         console.time("randomnum");
         for (let i = 0; i < this.numRnds; i++) {
@@ -106,13 +103,11 @@ export default {
           console.log(clic);
         }
         const b = performance.now();
-        this.endtime2 = new Date().toISOString().slice(11,19);
+        this.endtime2 = new Date().toISOString().slice(11, 19);
         console.timeEnd("randomnum");
         this.totaltime2 = b - a;
         if (this.endtime2 && this.endtime3) {
-          this.endtime = new Date().toISOString().slice(11,19);
-          this.Rt2 = new Date().getTime();
-          // this.totaltime = this.Rt2 - this.Rt
+          this.endtime = new Date().toISOString().slice(11, 19);
           this.totaltime = this.totaltime2 + this.totaltime3;
         }
       } else {
@@ -124,24 +119,21 @@ export default {
       const xorshift = require("xorshift");
       if (this.numRnds && this.numRnds <= 10000) {
         if (!this.starttime) {
-          this.starttime = new Date().toISOString().slice(11,19);
-          this.Rt = new Date().getTime();
+          this.starttime = new Date().toISOString().slice(11, 19);
         }
         const a = performance.now();
-        this.starttime3 = new Date().toISOString().slice(11,19);
+        this.starttime3 = new Date().toISOString().slice(11, 19);
         console.time("randomnum2");
         for (let i = 0; i < this.numRnds; i++) {
           const clic = xorshift.random();
           console.log(clic);
         }
         const b = performance.now();
-        this.endtime3 = new Date().toISOString().slice(11,19);
+        this.endtime3 = new Date().toISOString().slice(11, 19);
         console.timeEnd("randomnum2");
         this.totaltime3 = b - a;
         if (this.endtime2 && this.endtime3) {
-          this.endtime = new Date().toISOString().slice(11,19);
-          this.Rt2 = new Date().getTime();
-          // this.totaltime = this.Rt2 - this.Rt
+          this.endtime = new Date().toISOString().slice(11, 19);
           this.totaltime = this.totaltime2 + this.totaltime3;
         }
       } else {
@@ -151,11 +143,15 @@ export default {
     clear() {
       this.err = false;
     },
+    // generate() {
+    //   const hexString = '0x0000000fU'
+    //   console.log(parseInt(hexString, 16))
+    // },
     warn() {
       if (this.starttime && !this.endtime) {
         if (
           confirm(
-            "Test has not been completed. to continue test with current round value click cancel, to input new value click ok"
+            "Test has not been completed. to continue with current test click Cancel, to change number of rounds click OK"
           )
         ) {
           this.starttime = "";
